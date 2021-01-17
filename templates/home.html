@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container" style="text-align: center; padding-top: 8%;">
+        <h1 style="color: darkcyan; font-family: cursive;">Movie RecSys</h1>
+        <span style="font-family: 'system-ui'; font-style: italic"><b>AI-powered movie recommender sytem</b></span>
+    </div><br>
+    <form class="form yes container" action="{{ url_for('search') }}">
+        <input class="form-control mr-sm-1 col-lg-6" type="search"
+               placeholder="Search for a movie" required="true" aria-label="Search"
+               name="search"><br/>
+        <button class="btn btn-outline-success mr-sm-1 my-sm-0" type="submit">Search</button>
+    </form>
+
+{% endblock %}
