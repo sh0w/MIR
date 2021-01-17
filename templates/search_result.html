@@ -5,24 +5,86 @@
 
 {% block body %}
 
-    <div class="container">
-    <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title" style="display: inline">Query = {{ title }}</h5>
-                </div>
+    <div class="container clearfix">
+    <div class="card query">
+        <div class="card-body">
+            <h5 class="card-title" style="display: inline">Movie Recommendations for "{{ title }}"</h5>
+
+        </div>
     </div>
     <br><br>
     </div>
-    <div class="container">
+    <div class="container clearfix">
         {% for data in res %}
             <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title" style="display: inline">{{ data[2] }} -- {{ data[0] }}</h5>
-                    <h6 class="text-muted" style="display: inline">{{ data[1] }}</h6>
+                <div class="card-body clearfix">
 
+                    <img class="poster clearfix" src="static/img/movie_posters/{{data[2]}}.jpg">
+                    <div class="metadata clearfix">
+                        <h5 class="card-title" style="display: inline"><span class="movieTitle">{{ data[0] }}</span> <small> {{ data[1] }} % similarity</small></h5>
+                        <div class="movieId text-muted"> Movie ID: {{ data[2] }} </div>
+
+                        <!-- just show first video clip: -->
+                        <iframe width="320" height="200" data-youtubeId="{{data[3][0]}}" src=""></iframe>
+
+                            <!--
+                            {% for youtube_clip in data[3] %} 
+                                {{ youtube_clip }}  
+                            {% endfor %}-->
+
+
+                        <div style="clear:both;"> </div>
+                    <!--<h6 class="text-muted" style="display: inline"> Similarity: {{ data[1] }} %</h6>-->
+                    </div>
+                    <div style="clear:both;"></div>
                 </div>
             </div>
             <br> <br>
         {% endfor %}
     </div>
+
+<script>
+    $(document).ready(function(){/*
+
+        $(".card-body").each(function() {
+            movieTitle = $(this).find(".movieTitle").text();
+
+            wiki_title = movieTitle.replace(" ","_")+"_movie";
+
+            $.ajax({
+                type: "GET",
+                url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page="+wiki_title+"&callback=?",
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    console.log("DATA: ",data);
+
+                    //var markup = data.parse.text["*"];
+                    //var blurb = $('<div></div>').html(markup);
+                    //$('#article').html($(blurb).find('p'));
+                    $(this).find(".wikipedia").html(data);
+         
+                },
+                error: function (errorMessage) {
+                }
+            });
+
+            //$(this).find(".wikipedia").html("TITEL: " + movieTitle);
+        })
+
+ 
+ */
+ $(".card").on('mouseover',function() {
+    console.log("i'm doing it!!");
+    var iframe = $(this).find("iframe");
+    var y_url = "https://www.youtube.com/embed/" + iframe.attr("data-youtubeId");
+    iframe.attr("data-youtubeId","");
+    iframe.attr("src", y_url);
+    $(this).off('mouseover');
+ }); 
+
+});
+</script>
+
 {% endblock %}

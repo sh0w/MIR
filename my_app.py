@@ -11,10 +11,18 @@ app = Flask(__name__)
 
 # Data reading
 movie_dataset = pd.read_csv(r'testset_movies.csv')
+movieclips = pd.read_csv(r'testset_ids.csv')
 array = np.load(r'test_emb.npy')
 
 movies = movie_dataset['movieId'].to_list()
 titles = movie_dataset['title'].to_list()
+
+
+youtube_clips = dict()
+for m_id in movies:
+    clip_str = movieclips[movieclips['movieId'] == m_id].movieclipId.to_list()
+    youtube_clips[m_id] = ["".join(c.split("_")[1:]) for c in clip_str]
+
 # drop the last part of title with the year: "(2005)"
 titles_clipped = [" ".join(t.split(" ")[:-1]).lower() for t in titles]
 
@@ -53,7 +61,7 @@ def search():
 
         else:
             print("TITLE NOT FOUND...... use first movie:")
-            q_id = 0
+            q_id = movies[0]
             q_title = titles[0]
 
     similarity = cosine_similarity(array, array[dico_movie[q_id]].reshape(1, -1)).squeeze()
@@ -62,7 +70,7 @@ def search():
 
     score = np.sort(similarity)[::-1][1:101]
 
-    results = [(titles[i], s, movies[i]) for i, s in zip(most, score)]
+    results = [(titles[i], np.round(s*1000)/10., movies[i], youtube_clips[movies[i]]) for i, s in zip(most, score)]
 
     return render_template('search_result.html', res=results, title=q_title)
 
