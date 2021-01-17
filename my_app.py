@@ -62,9 +62,8 @@ def search():
 
     score = np.sort(similarity)[::-1][1:101]
 
-    print(most, q_title, score)
 
-    res = [(title[i], s) for i, s in zip(most, score)]
+    res = [(title[i], s, movie[i]) for i, s in zip(most, score)]
 
     return render_template('search_result.html', res=res, title=q_title)
 
