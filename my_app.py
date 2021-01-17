@@ -26,26 +26,6 @@ def home():
     return render_template('home.html')
 
 
-# @app.route('/articles')
-# def all_article():
-#     return render_template('articles.html', df=shuffle(df)[:NUM_PAGE_PR])
-#
-#
-# @app.route('/sim_<id_art>')
-# def most_sim(id_art):
-#     id_art = int(id_art)
-#
-#     most = np.argsort(array @ array[id_art])[::-1][:NUM_PAGE]
-#
-#     scores = np.sort(array @ array[id_art])[::-1][:NUM_PAGE]
-#
-#     arts = [df[i] for i in most]
-#
-#     res = list(zip(arts, scores))
-#
-#     return render_template('similar.html', res=res, id_q=id_art)
-
-
 @app.route('/search')
 def search():
     query = request.args['search']
@@ -64,16 +44,6 @@ def search():
 
     return render_template('search_result.html', res=results, title=q_title)
 
-
-@app.template_filter()
-def format_score(value):
-    value = float(value)
-    return "{:,.0%}".format(value)
-
-
-# @app.route('/charts/')
-# def line_route():
-#     return render_template('charts.html', chart=chart)
 
 
 if __name__ == '__main__':
