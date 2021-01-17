@@ -9,6 +9,19 @@ html, body {
 
 .home {
 	  text-shadow: 3px 3px #000;
+	  background: rgba(0, 0, 0, 0.4);
+	  width: auto;
+	  margin: auto;
+	  margin-top: 3em;
+	  width: 75%;
+	  padding-bottom: 5em;
+  transition: background 0.5s;
+  -webkit-transition: background 0.5s;
+}
+.home:hover {
+
+	  background: rgba(0, 0, 0, 0.55);
+
 }
 
 .yes {

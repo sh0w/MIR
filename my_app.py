@@ -61,7 +61,7 @@ def search():
 
         else:
             print("TITLE NOT FOUND...... use first movie:")
-            q_id = 0
+            q_id = movies[0]
             q_title = titles[0]
 
     similarity = cosine_similarity(array, array[dico_movie[q_id]].reshape(1, -1)).squeeze()

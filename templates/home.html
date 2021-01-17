@@ -5,9 +5,10 @@
 
 
 {% block body %}
-    <div class="container home" style="text-align: center; padding-top: 8%;">
-        <h1 style="color: white; font-family: cursive; font-size: 4em;">Multimedia Movie Recommendations</h1>
-        <span style="font-family: 'system-ui';  font-weight: lighter; font-size: 3em; color:white;">AI-powered Movie Recommender System</span>
+<div class="home clearfix">
+    <div class="container" style="text-align: center; padding-top: 8%;">
+        <h1 style="color: white; font-family: cursive; font-size: 3.5em;">Multimedia Movie Recommendations</h1>
+        <span style="font-family: 'system-ui';  font-weight: lighter; font-size: 2.5em; color:white;">AI-powered Movie Recommender System</span>
     </div><br>
     <form class="form yes container" action="{{ url_for('search') }}">
         <input class="form-control mr-sm-1 col-lg-6" type="search"
@@ -15,5 +16,5 @@
                name="search"><br/>
         <button class="btn btn-outline-success mr-sm-1 my-sm-0" type="submit">Search</button>
     </form>
-
+</div>
 {% endblock %}
