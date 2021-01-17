@@ -15,6 +15,8 @@ array = np.load(r'test_emb.npy')
 
 movies = movie_dataset['movieId'].to_list()
 titles = movie_dataset['title'].to_list()
+# drop the last part of title with the year: "(2005)"
+titles_clipped = [" ".join(t.split(" ")[:-1]).lower() for t in titles]
 
 dico_movie = dict(enumerate(movies))
 
@@ -30,11 +32,31 @@ def home():
 def search():
     query = request.args['search']
 
-    query = int(query)
+    try:
+        if int(query) in movies:
+            q_id = int(query)
+            q_title = titles[dico_movie[q_id]]
 
-    q_title = titles[dico_movie[query]]
+    #  if we can't cast to int, it's a string:
+    except:
+        query = query.lower()
 
-    similarity = cosine_similarity(array, array[dico_movie[query]].reshape(1, -1)).squeeze()
+        # just title without year:
+        if query in titles_clipped:
+            q_title = titles[titles_clipped.index(query)]
+            q_id = movies[titles_clipped.index(query)]
+
+        # full title with year:
+        elif query in titles:
+            q_title = query
+            q_id = movies[titles.index(query)]
+
+        else:
+            print("TITLE NOT FOUND...... use first movie:")
+            q_id = 0
+            q_title = titles[0]
+
+    similarity = cosine_similarity(array, array[dico_movie[q_id]].reshape(1, -1)).squeeze()
 
     most = np.argsort(similarity)[::-1][1:101]
 
