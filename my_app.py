@@ -9,19 +9,17 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
-NUM_PAGE = 50
-NUM_PAGE_PR = 100
-
 # Data reading
-data = pd.read_csv(r'testset_movies.csv')
+movie_dataset = pd.read_csv(r'testset_movies.csv')
 array = np.load(r'test_emb.npy')
 
-movie = data['movieId'].to_list()
-title = data['title'].to_list()
+movies = movie_dataset['movieId'].to_list()
+titles = movie_dataset['title'].to_list()
 
-dico_movie = dict(enumerate(movie))
+dico_movie = dict(enumerate(movies))
 
 dico_movie = {k: v for (v, k) in dico_movie.items()}
+
 
 @app.route('/')
 def home():
@@ -54,7 +52,7 @@ def search():
 
     query = int(query)
 
-    q_title = title[dico_movie[query]]
+    q_title = titles[dico_movie[query]]
 
     similarity = cosine_similarity(array, array[dico_movie[query]].reshape(1, -1)).squeeze()
 
@@ -62,10 +60,9 @@ def search():
 
     score = np.sort(similarity)[::-1][1:101]
 
+    results = [(titles[i], s, movies[i]) for i, s in zip(most, score)]
 
-    res = [(title[i], s, movie[i]) for i, s in zip(most, score)]
-
-    return render_template('search_result.html', res=res, title=q_title)
+    return render_template('search_result.html', res=results, title=q_title)
 
 
 @app.template_filter()
