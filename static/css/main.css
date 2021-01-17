@@ -1,12 +1,47 @@
-body {
-	background-image: url('/static/img/tsne_movies.jpg');
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'system-ui';
+	background-image: url('/static/img/tsne_movies_2.jpg');
+	background-size: cover;
+}
+
+.home {
+	  text-shadow: 3px 3px #000;
+}
+
+.yes {
+    margin-top: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.btn.btn-outline-success, form .form-control {
+	background: black;
+	color: white;
+	border: white;
+	font-size: 1.2em;
+}
+
+.clearfix:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
 }
 
 h5.card-title {
-	font-size: 2em;
+	font-size: 2.6em;
 	color: black;
 	font-weight: bold;
 	font-style: normal;
+}
+h5.card-title small {
+	font-size: 0.7em;
+	color: #aaa;
 }
 
 .movieId {
@@ -14,12 +49,41 @@ h5.card-title {
 	color: #444;
 
 }
-.card img.poster {
+
+.card-body {
+    overflow: hidden;
+    word-break: break-all;
+    overflow: hidden;
+}
+.card-body img.poster {
 	float: left;
 	height: 300px;
+	display: block;
+	margin-right: 15px;
+	position: relative;
+	float: left;
 }
 
-.card .metadata {
-	float:left;
-	margin-left: 15px;
+
+.card-body .metadata {
+	display: block;
+	float: left;
+  	word-break: break-all;
+	overflow:hidden;
+	word-wrap: break-word;
+	float:none;
+	margin: 0;
+	padding: 0;
 }
+
+.card {
+	opacity: 0.8;
+  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+}
+
+.card:hover {
+	opacity: 0.95;
+}
+
+iframe {background:black;}
