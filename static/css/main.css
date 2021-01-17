@@ -1,0 +1,25 @@
+body {
+	background-image: url('/static/img/tsne_movies.jpg');
+}
+
+h5.card-title {
+	font-size: 2em;
+	color: black;
+	font-weight: bold;
+	font-style: normal;
+}
+
+.movieId {
+	font-size: 0.8em;
+	color: #444;
+
+}
+.card img.poster {
+	float: left;
+	height: 300px;
+}
+
+.card .metadata {
+	float:left;
+	margin-left: 15px;
+}

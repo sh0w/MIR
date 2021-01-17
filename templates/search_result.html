@@ -8,7 +8,7 @@
     <div class="container">
     <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title" style="display: inline">Query = {{ title }}</h5>
+                    <h5 class="card-title" style="display: inline">Movie Recommendations for "{{ title }}"</h5>
                 </div>
     </div>
     <br><br>
@@ -17,9 +17,13 @@
         {% for data in res %}
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title" style="display: inline">{{ data[2] }} -- {{ data[0] }}</h5>
-                    <h6 class="text-muted" style="display: inline">{{ data[1] }}</h6>
 
+                    <img class="poster" src="static/img/movie_posters/{{data[2]}}.jpg">
+                    <div class="metadata">
+                    <h5 class="card-title" style="display: inline">{{ data[0] }} <small> {{ data[1] }} % similarity</small></h5>
+                    <div class="movieId text-muted"> ID: {{ data[2] }} </div>
+                    <!--<h6 class="text-muted" style="display: inline"> Similarity: {{ data[1] }} %</h6>-->
+                    </div>
                 </div>
             </div>
             <br> <br>

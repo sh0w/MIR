@@ -62,7 +62,7 @@ def search():
 
     score = np.sort(similarity)[::-1][1:101]
 
-    results = [(titles[i], s, movies[i]) for i, s in zip(most, score)]
+    results = [(titles[i], np.round(s*1000)/10., movies[i]) for i, s in zip(most, score)]
 
     return render_template('search_result.html', res=results, title=q_title)
 
