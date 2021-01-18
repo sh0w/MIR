@@ -21,7 +21,7 @@ titles = movie_dataset['title'].to_list()
 youtube_clips = dict()
 for m_id in movies:
     clip_str = movieclips[movieclips['movieId'] == m_id].movieclipId.to_list()
-    youtube_clips[m_id] = ["".join(c.split("_")[1:]) for c in clip_str]
+    youtube_clips[m_id] = ["_".join(c.split("_")[1:]) for c in clip_str]
 
 # drop the last part of title with the year: "(2005)"
 titles_clipped = [" ".join(t.split(" ")[:-1]).lower() for t in titles]
